@@ -25,15 +25,47 @@ public class FinallyCase {
 
 class FinallyCase2{
     public static void main(String[] args) {
-        Path path = Paths.get("D:/Simple.txt");// 절대경로(full 경로)
         BufferedWriter writer = null;
         try{
+            Path path = Paths.get("D:/Simple.txt");// 절대경로(full 경로)
             writer = Files.newBufferedWriter(path);
             writer.write("FinallyCase");
+            return;
         }catch (IOException e){
-            writer.close();
+            e.printStackTrace();
+        }
+        System.out.println("이게 실행이 되나 안되나 ㅋㅋㅋ (1)");
+        try {
+            if(writer != null){
+                writer.close();
+            }
+        } catch (IOException e) {
 
         }
+        System.out.println("-- 끝 --");
+    }
+}
+// 위와 아래의 차이는 catch에 잡히면 실행이 되냐 마냐의 차이
+class FinallyCase3 {
+    public static void main(String[] args) {
+        BufferedWriter writer = null;
+        try{
+            Path path = Paths.get("D:/Simple.txt");// 절대경로(full 경로)
+            writer = Files.newBufferedWriter(path);
+            writer.write("FinallyCase");
+            return;
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally { // 예외가 발생해도 안해도 실행되는 무조건 부분
+            System.out.println("이게 실행이 되나 안되나 ㅋㅋㅋ (2)");
+            try {
+                if(writer != null){
+                    writer.close();
+                }
+            } catch (IOException e) {
 
+            }
+            System.out.println("-- 끝 --");
+        }
     }
 }

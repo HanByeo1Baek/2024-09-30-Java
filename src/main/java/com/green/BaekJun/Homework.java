@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Homework {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        Student[] stu = new Student[10];
+        Student[][] stu = new Student[10][5];
 
         for(int i=0; i< stu.length; i++){
             String name = s.nextLine();
@@ -11,10 +11,11 @@ public class Homework {
             String dept = s.nextLine();
             int grade = s.nextInt();
             int sn = s.nextInt();
-
-            stu[i] = new Student(name, phone, dept, grade, sn);
+            for(int j=0; j<stu[i].length; j++){
+                stu[i][j] = new Student(name, phone, dept, grade, sn);
+            }
         }
-        for(Student item : stu){
+        for(Student[] item : stu){
             System.out.println(item);
         }
 
